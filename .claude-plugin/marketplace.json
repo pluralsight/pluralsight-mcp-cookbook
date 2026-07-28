@@ -1,0 +1,23 @@
+{
+  "name": "pluralsight-mcp-cookbook",
+  "description": "Skills, subagents, and prompts for working with the Pluralsight MCP server",
+  "owner": {
+    "name": "Pluralsight",
+    "url": "https://github.com/pluralsight/pluralsight-mcp-cookbook"
+  },
+  "plugins": [
+    {
+      "name": "pluralsight-learning",
+      "source": "./plugins/pluralsight-learning",
+      "description": "Pluralsight MCP learning skills and subagents -- starting with a manager's employee development-plan builder.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Pluralsight"
+      },
+      "homepage": "https://github.com/pluralsight/pluralsight-mcp-cookbook",
+      "repository": "https://github.com/pluralsight/pluralsight-mcp-cookbook",
+      "category": "learning",
+      "keywords": ["pluralsight", "learning", "mcp", "skills"]
+    }
+  ]
+}

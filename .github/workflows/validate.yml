@@ -1,0 +1,17 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      # Same command contributors run locally -- see CONTRIBUTING.md.
+      # Standard library only; uv provisions the interpreter from the script's
+      # own inline `requires-python` metadata, so nothing else to install.
+      - run: uv run internal/scripts/validate.py
