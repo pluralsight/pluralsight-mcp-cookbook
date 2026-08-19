@@ -1,8 +1,0 @@
-__pycache__/
-*.pyc
-.DS_Store
-
-# Never commit MCP configs -- they can carry tokens and org-specific endpoints.
-.vscode/mcp.json
-.mcp.json
-.claude/settings.local.json
