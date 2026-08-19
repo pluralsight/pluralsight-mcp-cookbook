@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pluralsight": {
+      "type": "http",
+      "url": "https://mcp.pluralsight.com/mcp"
+    }
+  }
+}

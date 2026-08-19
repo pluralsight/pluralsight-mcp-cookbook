@@ -1,0 +1,49 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Validate plugin manifest
+        run: claude plugin validate ./plugins/pluralsight
+
+      - name: Validate marketplace manifest
+        run: claude plugin validate .
+
+      - name: Check relative markdown links
+        run: |
+          broken=0
+          while IFS= read -r pair; do
+            file="${pair%%|*}"; link="${pair#*|}"
+            target="${link%%#*}"
+            [ -z "$target" ] && continue
+            dir=$(dirname "$file")
+            if [ ! -e "$dir/$target" ]; then
+              echo "BROKEN LINK: $file -> $link"
+              broken=1
+            fi
+          done < <(grep -roE --include='*.md' '\]\((\.[^)#]*|[^)/:#][^):]*\.md[^)]*)\)' . \
+                   | sed -E 's/^([^:]+):\]\((.*)\)$/\1|\2/')
+          exit $broken
+
+      - name: Ensure no credentials in tracked MCP configs
+        run: |
+          if grep -rl --include='*.json' -iE '"(Authorization|headers)"|Bearer ' plugins/ .claude-plugin/; then
+            echo "Credential-like content found in tracked config files"
+            exit 1
+          fi
+          echo "No credentials found"

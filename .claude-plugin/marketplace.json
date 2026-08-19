@@ -1,0 +1,21 @@
+{
+  "name": "pluralsight",
+  "owner": {
+    "name": "Pluralsight",
+    "url": "https://www.pluralsight.com"
+  },
+  "metadata": {
+    "description": "Skills, agents, and prompt examples for the Pluralsight MCP Server"
+  },
+  "plugins": [
+    {
+      "name": "pluralsight",
+      "source": "./plugins/pluralsight",
+      "description": "Connects to the Pluralsight MCP Server and adds skills and agents for searching the library, building learning plans, and getting platform support",
+      "version": "0.1.0",
+      "author": {
+        "name": "Pluralsight"
+      }
+    }
+  ]
+}

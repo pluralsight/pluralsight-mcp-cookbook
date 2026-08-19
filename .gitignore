@@ -1,0 +1,11 @@
+# Local MCP configuration (may contain credentials) — never commit
+/.mcp.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
