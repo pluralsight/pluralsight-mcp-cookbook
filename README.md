@@ -59,7 +59,7 @@ Find me an intermediate course on Terraform.
 
 ## Contributing
 
-We welcome new examples, skills, and agents — see [CONTRIBUTING.md](CONTRIBUTING.md).
+We welcome new examples, skills, and agents — see [CONTRIBUTING.md](CONTRIBUTING.md). Skills follow the open [Agent Skills specification](https://agentskills.io/specification.md); [`learning-plan`](plugins/pluralsight/skills/learning-plan/SKILL.md) is the reference implementation.
 
 ## Feedback
 

@@ -1,6 +1,10 @@
 ---
 name: find-learning-content
 description: Search Pluralsight for courses, labs, paths, assessments, or specific tutorial content. Use when the user wants to find learning material on a topic, technology, or skill, or asks "is there a Pluralsight course on X".
+license: MIT
+metadata:
+  author: Pluralsight
+  version: "1.0"
 ---
 
 # Find Learning Content
@@ -18,10 +22,7 @@ For broad requests, start with `search_pluralsight_library`. If the user follows
 
 ## Using search_pluralsight_library effectively
 
-- `query`: describe what the user wants to learn in natural language.
-- `sort` (required): use `"relevance"` by default; use `"newest"` when the user asks for up-to-date content on fast-moving technologies; use `"popularity"` when the user wants the most proven or widely-taken content.
-- `content_type`: set when the user asks for a specific format — `"video-course"`, `"lab"` (hands-on practice), `"path"` (structured multi-course journey), `"skilliq"` (skill assessment), `"practice-exam"` (certification prep). Omit to search everything.
-- `levels`: set `["beginner"]`, `["intermediate"]`, `["advanced"]`, or a combination when the user indicates their experience level. Omit when unknown.
+Set `sort` (required — `"relevance"` by default) and add `content_type` / `levels` filters when the user's phrasing indicates a format or experience level. Full parameter values and phrasing-to-parameter mappings: [references/search-parameters.md](references/search-parameters.md).
 
 ## Presenting results
 

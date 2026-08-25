@@ -1,6 +1,10 @@
 ---
 name: pluralsight-support
 description: Answer questions about the Pluralsight platform, accounts, billing, subscriptions, and features using official Help Center documentation. Use when the user asks how Pluralsight works, has an account or billing question, or needs platform support.
+license: MIT
+metadata:
+  author: Pluralsight
+  version: "1.0"
 ---
 
 # Pluralsight Support

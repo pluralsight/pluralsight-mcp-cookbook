@@ -26,6 +26,8 @@ Skills trigger automatically when your request matches, or invoke them directly:
 | [learning-plan](skills/learning-plan/SKILL.md) | `/pluralsight:learning-plan <goal>` | Building a personalized, ordered study plan |
 | [pluralsight-support](skills/pluralsight-support/SKILL.md) | `/pluralsight:pluralsight-support <question>` | Account, billing, and platform questions |
 
+Skills follow the [Agent Skills specification](https://agentskills.io/specification.md). `learning-plan` bundles a [schedule script](skills/learning-plan/scripts/build_schedule.py) that turns a plan into dated weeks, plus [references](skills/learning-plan/references/plan-design.md) and an [output template](skills/learning-plan/assets/plan-template.md).
+
 ### Agents
 
 | Agent | Use for |
