@@ -1,58 +1,70 @@
 # Pluralsight MCP Cookbook
 
-Worked examples for the [Pluralsight MCP server](https://mcp.pluralsight.com/mcp) — prompts,
-and Agent Skills and subagents built on top of them.
+Prompts, skills, and agents for the **Pluralsight MCP Server** — connect your AI assistant to Pluralsight to search the learning library, build personalized learning plans, and get platform support without leaving your editor.
 
-Works with **Claude Code**, **Claude Desktop**, and **VS Code Copilot**. Some of it installs;
-all of it reads as reference.
+The [Pluralsight MCP Server](https://mcp.pluralsight.com/mcp) exposes tools to search courses, labs, paths, and assessments; find specific tutorial clips; check your learning activity; search Help Center docs; and send feedback. This cookbook shows how to use them, from single prompts to full agent workflows.
 
-```bash
-claude mcp add --transport http --scope user pluralsight https://mcp.pluralsight.com/mcp
+## Quick start
+
+### Claude Code
+
+```shell
+/plugin marketplace add pluralsight/pluralsight-mcp-cookbook
+/plugin install pluralsight@pluralsight
 ```
 
-Full setup for all three tools, including Desktop and Copilot: **[docs/setup.md](docs/setup.md)**.
+### VS Code (GitHub Copilot)
 
-## What's here
+Add to your settings, then install **pluralsight** from the Extensions view (`@agentPlugins`):
+
+```json
+"chat.plugins.marketplaces": ["pluralsight/pluralsight-mcp-cookbook"]
+```
+
+Installing the plugin configures the MCP server, three skills, and a learning-advisor agent. Authenticate with your Pluralsight account on first use. Full instructions (including MCP-only setup without the plugin): [docs/installation.md](docs/installation.md).
+
+### Try it
+
+```text
+What have I been learning on Pluralsight recently?
+```
+
+```text
+Find me an intermediate course on Terraform.
+```
+
+```text
+/pluralsight:learning-plan become a Kubernetes administrator in 3 months
+```
+
+## What's in this repo
 
 | | |
 | --- | --- |
-| **[prompts/](prompts/)** | Copy-paste examples, single-shot → scoped → multi-step. Start here. |
-| **[docs/tools-reference.md](docs/tools-reference.md)** | The five tools, their parameters, and the response quirks that matter. |
-| **[plugins/pluralsight-learning/](plugins/pluralsight-learning/)** | The installable plugin — one skill so far. |
-| **[docs/setup.md](docs/setup.md)** | Setup and the per-tool support matrix. |
-| **[internal/](internal/)** | The validator and the maintainer authoring guide. Not for customers. |
+| [`plugins/pluralsight/`](plugins/pluralsight/README.md) | The installable plugin: MCP server config, skills, and agents |
+| [`examples/01-getting-started/`](examples/01-getting-started/README.md) | Single-tool prompts — start here |
+| [`examples/02-intermediate/`](examples/02-intermediate/README.md) | Multi-tool prompts and patterns |
+| [`examples/03-advanced/`](examples/03-advanced/README.md) | Skill- and agent-driven workflows |
+| [`docs/`](docs/installation.md) | Installation and contributor guides |
 
-## The content
+## MCP server tools
 
-**[`team-learning-plan`](plugins/pluralsight-learning/skills/team-learning-plan/SKILL.md)** —
-for a manager, not the learner: turns a report's Job Description and Midyear Performance Review
-into a 6-month development plan, mapping the gaps between the two to real Pluralsight courses
-and clips, with a 30/60/90-day milestone timeline and success criteria.
+| Tool | What it does |
+| --- | --- |
+| `search_pluralsight_library` | Find courses, labs, learning paths, Skill IQ assessments, and practice exams, with level and sort filters |
+| `query_pluralsight_content_index` | Semantic search over course clips and tutorial content |
+| `query_pluralsight_help_center_index` | Search official Help Center articles (account, billing, platform) |
+| `get_user_content_activity` | Fetch your last 3 interactions across all Pluralsight content types |
+| `submit_user_feedback` | Send structured feedback about the MCP server to Pluralsight |
 
-## Install (Claude Code)
+## Contributing
 
-```
-/plugin marketplace add pluralsight/pluralsight-mcp-cookbook
-/plugin install pluralsight-learning@pluralsight-mcp-cookbook
-/reload-plugins
-```
+We welcome new examples, skills, and agents — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Skills load automatically when a request matches, or invoke one directly:
+## Feedback
 
-```
-/pluralsight-learning:team-learning-plan
-```
+The fastest way to reach the team building the MCP server is through the server itself: ask your assistant to *"send feedback about the Pluralsight MCP server"* ([example](examples/01-getting-started/send-feedback.md)). For issues with this cookbook, open a GitHub issue.
 
-**Claude Desktop** has no plugin support; use the prompts directly and paste skill bodies into
-a Project. **VS Code Copilot** picks up the skills from the committed workspace setting, or copy
-them into your own `.github/skills/`. Both paths are in [docs/setup.md](docs/setup.md).
+## License
 
-## Notes
-
-Everything here uses the five generally available tools only, so the examples don't break when
-tools in development change.
-
-Results are scoped to the libraries your Pluralsight license covers — thin results usually mean
-license scope rather than a gap in the library.
-
-Contributions: [CONTRIBUTING.md](CONTRIBUTING.md) · See [LICENSE](LICENSE).
+[MIT](LICENSE)

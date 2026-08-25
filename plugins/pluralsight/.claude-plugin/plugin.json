@@ -1,0 +1,12 @@
+{
+  "name": "pluralsight",
+  "description": "Pluralsight MCP Server integration: search the learning library, build personalized learning plans, and get Pluralsight platform support",
+  "version": "0.1.0",
+  "author": {
+    "name": "Pluralsight"
+  },
+  "homepage": "https://www.pluralsight.com",
+  "repository": "https://github.com/pluralsight/pluralsight-mcp-cookbook",
+  "license": "MIT",
+  "keywords": ["pluralsight", "learning", "mcp", "courses", "skills"]
+}

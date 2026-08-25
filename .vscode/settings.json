@@ -1,7 +1,0 @@
-{
-  // Points VS Code Copilot at the same skill files Claude Code loads from the plugin,
-  // so there is only one copy of each SKILL.md in this repo. See docs/setup.md.
-  "chat.agentSkillsLocations": {
-    "plugins/pluralsight-learning/skills": true
-  }
-}

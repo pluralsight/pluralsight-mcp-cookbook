@@ -1,8 +1,11 @@
-__pycache__/
-*.pyc
-.DS_Store
+# Local MCP configuration (may contain credentials) — never commit
+/.mcp.json
 
-# Never commit MCP configs -- they can carry tokens and org-specific endpoints.
-.vscode/mcp.json
-.mcp.json
-.claude/settings.local.json
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
