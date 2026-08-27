@@ -1,6 +1,13 @@
 # Local MCP configuration (may contain credentials) — never commit
 /.mcp.json
 
+# Local Claude Code settings
+/.claude/settings.local.json
+
+# Python tooling (bundled skill scripts)
+__pycache__/
+.venv/
+
 # OS
 .DS_Store
 Thumbs.db

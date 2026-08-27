@@ -1,7 +1,7 @@
 {
   "name": "pluralsight",
   "description": "Pluralsight MCP Server integration: search the learning library, build personalized learning plans, and get Pluralsight platform support",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Pluralsight"
   },

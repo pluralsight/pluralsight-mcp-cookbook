@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: MCP server feedback or feature requests
+    url: https://github.com/pluralsight/pluralsight-mcp-cookbook/blob/main/examples/01-getting-started/send-feedback.md
+    about: For the MCP server itself (not this cookbook), use the submit_user_feedback tool — it goes straight to the team building the server.
+  - name: Installation help
+    url: https://github.com/pluralsight/pluralsight-mcp-cookbook/blob/main/docs/installation.md
+    about: Setup and troubleshooting steps for Claude Code and VS Code.
+  - name: Contributing guide
+    url: https://github.com/pluralsight/pluralsight-mcp-cookbook/blob/main/CONTRIBUTING.md
+    about: How to add examples, skills, and agents.
+  - name: Pluralsight Help Center
+    url: https://help.pluralsight.com
+    about: Account, billing, and subscription questions.

@@ -24,6 +24,28 @@ jobs:
       - name: Validate marketplace manifest
         run: claude plugin validate .
 
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate skills against the Agent Skills spec
+        run: |
+          failed=0
+          for skill in plugins/pluralsight/skills/*/; do
+            echo "Validating $skill"
+            uvx --from skills-ref agentskills validate "$skill" || failed=1
+          done
+          exit $failed
+
+      - name: Check bundled skill scripts
+        run: |
+          shopt -s nullglob
+          for script in plugins/pluralsight/skills/*/scripts/*.py; do
+            echo "Checking $script"
+            uv run "$script" --help > /dev/null
+          done
+
       - name: Check relative markdown links
         run: |
           broken=0
