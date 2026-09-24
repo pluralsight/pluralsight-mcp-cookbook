@@ -118,7 +118,7 @@ Design scripts for an assistant, not a human at a terminal:
 
 - **Description is the trigger.** Write it as "does X. Use when the user Y" — cover both the capability and the situations that should invoke it. Look at the [existing skills](../plugins/pluralsight/skills/) for the pattern.
 - **Name exact tools and parameters.** "Call `search_pluralsight_library` with `content_type: "path"` first" beats "search for paths".
-- **Only reference the seven documented tools** (see [plugin README](../plugins/pluralsight/README.md)).
+- **Only reference the 12 documented tools** (see [plugin README](../plugins/pluralsight/README.md)), and note in the skill when a tool it calls is leader-only.
 - **Handle the empty case**: if the skill takes `$ARGUMENTS`, say what to do when it's empty (usually: ask the user).
 - **Don't hardcode course titles.** The catalog changes; let the tools return results.
 

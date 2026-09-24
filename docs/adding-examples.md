@@ -42,7 +42,7 @@ The shape of a good response, plus useful follow-up prompts.
 
 ## Rules
 
-- **Only use the documented tools**: `search_pluralsight_library`, `query_pluralsight_content_index`, `query_pluralsight_help_center_index`, `get_user_content_activity`, `list_channels`, `create_channel`, `submit_user_feedback`.
+- **Only use the documented tools**: `search_pluralsight_library`, `query_pluralsight_content_index`, `query_pluralsight_help_center_index`, `get_user_content_activity`, `list_channels`, `create_channel`, `get_channel_details`, `update_channel`, `assign_team_to_channel`, `analytics_explore`, `analytics_execute`, `submit_user_feedback`. Note which tools your example uses that are leader-only (`assign_team_to_channel`, `analytics_explore`, `analytics_execute`) — call that out in the example so readers without a leader account know why it won't work for them.
 - **Test the prompt** against the live MCP server before submitting — prompts must work as written.
 - **Don't hardcode course titles** in expected output; the library changes.
 - **Add the example to its level's `README.md`** table.

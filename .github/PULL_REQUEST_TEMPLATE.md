@@ -22,7 +22,7 @@
 ## Checklist
 
 - [ ] Tested against the live server (`https://mcp.pluralsight.com/mcp`) as written
-- [ ] Uses only the seven documented MCP tools
+- [ ] Uses only the 12 documented MCP tools, and notes when a used tool is leader-only
 - [ ] No credentials committed — the bundled `plugins/pluralsight/.mcp.json` still contains only the server URL
 - [ ] No hardcoded course titles (the catalog changes; let the tools return results)
 - [ ] `claude plugin validate ./plugins/pluralsight` passes

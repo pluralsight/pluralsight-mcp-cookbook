@@ -72,13 +72,25 @@ for the public cookbook (e.g. write tools, anything still labelled
 experimental/beta, or anything whose description signals it's
 internal-only). Present the user with the **full** live list from Stage 1 —
 one line per tool with its name and one-sentence description — and ask them
-to mark each one include / exclude for the external docs. Don't use a
-multiple-choice UI that caps the option count; just list them in the
+to mark each one include / exclude for the external docs. By default, don't
+use a multiple-choice UI that caps the option count; just list them in the
 conversation and let the user respond (e.g. "include all but X and Y", or a
 per-tool yes/no). If a tool is brand new since the last sync, call that out
 explicitly so it doesn't get silently waved through.
 
-Two signals are worth surfacing explicitly rather than judging silently:
+If the user explicitly asks for a checkbox/toggle-style UI instead, use the
+`AskUserQuestion` tool with `multiSelect: true` rather than reaching for a
+web artifact — this is a same-turn decision to feed back into the
+conversation, not something the user will revisit or share, and an artifact
+is the wrong tool for that. `AskUserQuestion` caps at 4 options per question
+and 4 questions per call, so when the approved-plus-candidate tool list is
+larger than that, split it into logical groups (e.g. one question per tool
+family — channel management, analytics, sandbox) instead of trying to fit
+everything into one flat list. Only reach for a shareable artifact if the
+user's own phrasing signals they want something durable or linkable, not
+just an in-terminal decision.
+
+Three signals are worth surfacing explicitly rather than judging silently:
 
 - **Naming/namespace signals for exclude-by-default.** A namespace suffix
   like `-sandbox`, or a tool description that says something like "only
@@ -86,6 +98,17 @@ Two signals are worth surfacing explicitly rather than judging silently:
   of the stable public surface. Flag these to the user as a block with a
   recommended default (exclude), rather than presenting them exactly like
   every other tool and making the user do the pattern-matching themselves.
+- **Access-gating signals — include, but mark.** A tool description that
+  says something like "leader only", "requires a [plan/role]", or otherwise
+  restricts by team/account type is not a reason to exclude it — it's a
+  reason to *mark* it. Read every parameter's description too, not just the
+  tool's own: a tool can be open to all users while one specific parameter
+  (e.g. an `enable_analytics` flag) is gated to a subset of them. Surface
+  these explicitly in the Stage 2 list (e.g. "🔒 leader only") so the
+  include/exclude call and the access-level call happen in the same pass,
+  and carry the marker forward — it needs to survive into Stage 3's locked
+  spec and Stage 4/5's edits (an access column or inline marker in the
+  tables and prose, not just a new row).
 - **Family gaps.** If the approved tools from a past sync belong to an
   obvious family (channel management, analytics, etc.) and this run's list
   is missing a member that family would be expected to have, that's more
@@ -96,7 +119,8 @@ Two signals are worth surfacing explicitly rather than judging silently:
 
 From the user's answer, build the final approved list: for each included
 tool, its exact name, its full parameter list (name, type, required/default,
-description), and the description text to use in the docs (the server's
+description), its access level (all users / leader-only / a specific
+parameter gated), and the description text to use in the docs (the server's
 wording verbatim unless the user asks to reword it). Read this list back to
 the user as the thing you're about to build a plan against, since everything
 downstream depends on it being right. Treat their confirmation here as
@@ -131,13 +155,15 @@ item but don't name individual tools, so a fresh contributor's PR checklist
 can go stale even when every doc page is correct.
 
 For each file that references the tool list, work out concretely what has to
-change: a new row in a table, a removed tool name from a "the five
-documented tools" style sentence (update the count too — don't leave a
-number that's now wrong), a changed parameter in a skill's instructions or a
-`references/*.md` parameter table, an agent's `tools:` frontmatter allowlist,
-a new example under `examples/01-getting-started/` for a newly-added tool
-that has no worked example yet, or a version bump in
-`.claude-plugin/marketplace.json` / `plugins/pluralsight/.claude-plugin/plugin.json`.
+change: a new row in a table (with an access column/marker if the tool is
+access-gated per Stage 2/3, not just the name and description), a removed
+tool name from a "the five documented tools" style sentence (update the
+count too — don't leave a number that's now wrong), a changed parameter in a
+skill's instructions or a `references/*.md` parameter table, an agent's
+`tools:` frontmatter allowlist, a new example under
+`examples/01-getting-started/` for a newly-added tool that has no worked
+example yet, or a version bump in `.claude-plugin/marketplace.json` /
+`plugins/pluralsight/.claude-plugin/plugin.json`.
 
 For the version bump, use a simple rule rather than eyeballing "materially
 changed": newly-approved tool(s) added with nothing removed → minor bump.
@@ -151,6 +177,23 @@ text edits — e.g. `docs/adding-examples.md` requires "only use the documented
 tools", so a newly-approved tool with zero examples is a gap worth surfacing,
 even if writing the example itself needs the user's product judgment.
 
+**Filling that gap for a write tool or an access-gated tool.** When you (or a
+later session) actually write the deferred example, `CONTRIBUTING.md`'s
+"test against the live server" rule still applies, but test it safely:
+
+- Look for an existing safe-to-use fixture in the live account (e.g. a
+  channel already named or described as a test/QA fixture) before creating
+  new state, rather than mutating something real.
+- If the tool has a side-effecting flag (e.g. a notification-email toggle),
+  test with it set to its no-op value so the live call doesn't reach real
+  people, and mention in the example's "What to expect" section that the
+  same option exists for the reader.
+- Confirm the exact call with the user before running a write tool live,
+  same as any other write action.
+- Never publish the real account data, ids, or titles used during testing
+  into the example file — genericize it, the same way the repo already
+  requires not hardcoding course titles.
+
 Write this up as a concrete, file-by-file plan: file path, what changes, and
 why (tie each change back to a specific Stage 3 spec entry or a stale
 reference you found). Present the plan and **stop — wait for explicit
@@ -163,7 +206,10 @@ Once approved, make exactly the changes in the plan. A few repo-specific
 things worth keeping straight while editing:
 
 - Table rows for tools live in two places that must stay identical in
-  substance: `README.md` and `plugins/pluralsight/README.md`.
+  substance: `README.md` and `plugins/pluralsight/README.md`, including any
+  access-level marker per tool from Stage 3's spec — keep both in sync.
+  Any new tool-name bullet list elsewhere (e.g. `docs/adding-agents.md`)
+  should mark leader-only or otherwise gated names inline too.
 - `docs/adding-agents.md` lists tool names twice — once per fully-qualified
   prefix (`mcp__plugin_pluralsight_pluralsight__` and `mcp__pluralsight__`).
   Both need the same set of bare tool names appended.

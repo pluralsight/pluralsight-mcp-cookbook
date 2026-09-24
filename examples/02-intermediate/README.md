@@ -9,3 +9,4 @@ Prompts that combine multiple MCP tools in one request. The assistant chains too
 | [Deep-dive on a subtopic](deep-dive-subtopic.md) | `search_pluralsight_library` + `query_pluralsight_content_index` |
 | [Assess then practice](assess-then-practice.md) | `search_pluralsight_library` (skilliq + lab) + `get_user_content_activity` |
 | [Build a learning path](build-a-learning-path.md) | `search_pluralsight_library` + `create_channel` |
+| [Check your team's learning time](check-team-channel-analytics.md) | `analytics_explore` + `analytics_execute` (leader only) |
