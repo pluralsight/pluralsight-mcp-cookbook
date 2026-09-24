@@ -2,7 +2,7 @@
 
 Prompts, skills, and agents for the **Pluralsight MCP Server** — connect your AI assistant to Pluralsight to search the learning library, build personalized learning plans, and get platform support without leaving your editor.
 
-The [Pluralsight MCP Server](https://mcp.pluralsight.com/mcp) exposes tools to search courses, labs, paths, and assessments; find specific tutorial clips; check your learning activity; search Help Center docs; and send feedback. This cookbook shows how to use them, from single prompts to full agent workflows.
+The [Pluralsight MCP Server](https://mcp.pluralsight.com/mcp) exposes tools to search courses, labs, paths, and assessments; find specific tutorial clips; check your learning activity; search Help Center docs; manage learning paths (channels); pull team analytics; and send feedback. This cookbook shows how to use them, from single prompts to full agent workflows. Some tools — team analytics and assigning channels to a team — require a Pluralsight leader account and won't appear for every user.
 
 ## Quick start
 
@@ -46,16 +46,26 @@ Find me an intermediate course on Terraform.
 | [`examples/02-intermediate/`](examples/02-intermediate/README.md) | Multi-tool prompts and patterns |
 | [`examples/03-advanced/`](examples/03-advanced/README.md) | Skill- and agent-driven workflows |
 | [`docs/`](docs/installation.md) | Installation and contributor guides |
+| [`docs/agent-integration-guidelines.md`](docs/agent-integration-guidelines.md) | Copy-paste system-prompt guidance for wiring the MCP server into your own agent on any platform |
 
 ## MCP server tools
 
-| Tool | What it does |
-| --- | --- |
-| `search_pluralsight_library` | Find courses, labs, learning paths, Skill IQ assessments, and practice exams, with level and sort filters |
-| `query_pluralsight_content_index` | Semantic search over course clips and tutorial content |
-| `query_pluralsight_help_center_index` | Search official Help Center articles (account, billing, platform) |
-| `get_user_content_activity` | Fetch your last 3 interactions across all Pluralsight content types |
-| `submit_user_feedback` | Send structured feedback about the MCP server to Pluralsight |
+| Tool | What it does | Access |
+| --- | --- | --- |
+| `search_pluralsight_library` | Find courses, labs, learning paths, Skill IQ assessments, and practice exams, with level and sort filters | All users |
+| `query_pluralsight_content_index` | Semantic search over course clips and tutorial content | All users |
+| `query_pluralsight_help_center_index` | Search official Help Center articles (account, billing, platform) | All users |
+| `get_user_content_activity` | Fetch your last 3 interactions across all Pluralsight content types | All users |
+| `list_channels` | List the learning channels (paths) the current user owns, edits, or views | All users |
+| `create_channel` | Create a new learning path (channel) from real library content ids (`enable_analytics` requires a leader account) | All users |
+| `get_channel_details` | Get a channel's full content list and item count | All users |
+| `update_channel` | Update a channel's title/description or append content (`enable_analytics` requires a leader account) | All users |
+| `assign_team_to_channel` | Assign your team to a channel as viewers, with a notification email | **Leader only** |
+| `analytics_explore` | Discover available leader-analytics queries and their filters/fields | **Leader only** |
+| `analytics_execute` | Run a leader-analytics query and get rows back | **Leader only** |
+| `submit_user_feedback` | Send structured feedback about the MCP server to Pluralsight | All users |
+
+Tools marked **Leader only** require a Pluralsight leader/team-management plan — they won't be available or return results for other accounts.
 
 ## Contributing
 

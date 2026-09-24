@@ -65,7 +65,7 @@ Add to `.vscode/mcp.json` in your workspace (or run **MCP: Add Server**):
 
 ### Other MCP clients
 
-Any client supporting streamable HTTP transport can connect to `https://mcp.pluralsight.com/mcp`.
+Any client supporting streamable HTTP transport can connect to `https://mcp.pluralsight.com/mcp`. See [agent-integration-guidelines.md](agent-integration-guidelines.md) for system-prompt guidance to get consistent, correctly-linked results from any client.
 
 ## Troubleshooting
 
