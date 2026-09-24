@@ -46,6 +46,7 @@ Find me an intermediate course on Terraform.
 | [`examples/02-intermediate/`](examples/02-intermediate/README.md) | Multi-tool prompts and patterns |
 | [`examples/03-advanced/`](examples/03-advanced/README.md) | Skill- and agent-driven workflows |
 | [`docs/`](docs/installation.md) | Installation and contributor guides |
+| [`docs/agent-integration-guidelines.md`](docs/agent-integration-guidelines.md) | Copy-paste system-prompt guidance for wiring the MCP server into your own agent on any platform |
 
 ## MCP server tools
 
