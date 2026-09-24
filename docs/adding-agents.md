@@ -31,12 +31,14 @@ The fully-qualified name of an MCP tool depends on **how the server was configur
 | Plugin install (the normal case) | `mcp__plugin_pluralsight_pluralsight__` |
 | Manual `.mcp.json` server named `pluralsight` | `mcp__pluralsight__` |
 
-The five available tool names to append to either prefix:
+The seven available tool names to append to either prefix:
 
 - `inferences___search_pluralsight_library`
 - `inferences___query_pluralsight_content_index`
 - `inferences___query_pluralsight_help_center_index`
 - `inferences___get_user_content_activity`
+- `inferences___list_channels`
+- `inferences___create_channel`
 - `inferences___submit_user_feedback`
 
 Restrict `tools` to what the agent needs — see [learning-advisor.md](../plugins/pluralsight/agents/learning-advisor.md) for a working example. If you omit the `tools` field entirely, the agent inherits all tools (including every MCP tool), which also works but loses the restriction.

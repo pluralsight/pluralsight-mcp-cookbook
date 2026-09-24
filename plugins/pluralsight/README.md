@@ -14,6 +14,8 @@ Installing this plugin configures the MCP server automatically — see [installa
 | `query_pluralsight_content_index` | Semantic search over course clips and tutorial content, filtered to your licensed libraries |
 | `query_pluralsight_help_center_index` | Search official Help Center articles (account, billing, subscriptions, platform support) |
 | `get_user_content_activity` | Fetch your last 3 interactions across all Pluralsight content types |
+| `list_channels` | List the learning channels (paths) the current leader owns or edits |
+| `create_channel` | Create a new learning path (channel) from real library content ids |
 | `submit_user_feedback` | Send structured feedback about the MCP server to Pluralsight |
 
 ### Skills

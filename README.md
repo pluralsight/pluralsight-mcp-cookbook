@@ -2,7 +2,7 @@
 
 Prompts, skills, and agents for the **Pluralsight MCP Server** — connect your AI assistant to Pluralsight to search the learning library, build personalized learning plans, and get platform support without leaving your editor.
 
-The [Pluralsight MCP Server](https://mcp.pluralsight.com/mcp) exposes tools to search courses, labs, paths, and assessments; find specific tutorial clips; check your learning activity; search Help Center docs; and send feedback. This cookbook shows how to use them, from single prompts to full agent workflows.
+The [Pluralsight MCP Server](https://mcp.pluralsight.com/mcp) exposes tools to search courses, labs, paths, and assessments; find specific tutorial clips; check your learning activity; search Help Center docs; manage learning paths (channels); and send feedback. This cookbook shows how to use them, from single prompts to full agent workflows.
 
 ## Quick start
 
@@ -55,6 +55,8 @@ Find me an intermediate course on Terraform.
 | `query_pluralsight_content_index` | Semantic search over course clips and tutorial content |
 | `query_pluralsight_help_center_index` | Search official Help Center articles (account, billing, platform) |
 | `get_user_content_activity` | Fetch your last 3 interactions across all Pluralsight content types |
+| `list_channels` | List the learning channels (paths) the current leader owns or edits |
+| `create_channel` | Create a new learning path (channel) from real library content ids |
 | `submit_user_feedback` | Send structured feedback about the MCP server to Pluralsight |
 
 ## Contributing
