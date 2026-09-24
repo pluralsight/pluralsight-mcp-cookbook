@@ -52,7 +52,7 @@ confirmed no further undiscovered tools exist.
 As of this sync the count is 12 (see the top of this file). Update the count word/number in each of these whenever it changes:
 
 - `docs/adding-examples.md` — "Rules" section: "Only use the documented tools: `search_pluralsight_library`, ...".
-- `docs/adding-skills.md` — "Guidelines" section: "Only reference the 12 documented tools (see [plugin README](...))".
+- `docs/adding-skills.md` — "Guidelines" section: "Only reference the 12 documented tools (see plugin README)".
 - `docs/adding-agents.md` — "Tool names" section: bullet list of "The 12 available tool names to append to either prefix", with leader-only ones marked inline.
 - `CONTRIBUTING.md` — "Ground rules": "Use only the documented tools: ...".
 - `.github/PULL_REQUEST_TEMPLATE.md` — checklist item "Uses only the 12 documented MCP tools".
