@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pluralsight MCP Cookbook</title>
+<meta name="description" content="Copy-ready prompts for the Pluralsight MCP Server.">
+<!--
+  Example static site for GitHub Pages. Publish this folder (site/) with the
+  GitHub Actions workflow in .github/workflows/pages.yml, or copy index.html
+  into /docs and publish from the branch.
+
+  The prompts live in the PROMPTS array in the script at the bottom. They are
+  copied from examples/**/*.md, so when an example changes, update that entry
+  too (or generate the array from the Markdown with a build script).
+-->
+<style>
+  :root{
+    --bg:#f6f7fb; --surface:#ffffff; --fg:#161b26; --muted:#586174; --line:#dfe3ec;
+    --accent:#c2185b; --accent-fg:#ffffff; --accent-soft:#fbe4ee;
+    --code-bg:#eef0f6; --chip:#e8ebf3; --ok:#17794a;
+    --font-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f131b; --surface:#181e29; --fg:#e8ecf4; --muted:#9aa4b8; --line:#2a3342;
+      --accent:#ff7aa8; --accent-fg:#1a0710; --accent-soft:#3a1827;
+      --code-bg:#222a38; --chip:#252e3d; --ok:#5fd39a; color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f131b; --surface:#181e29; --fg:#e8ecf4; --muted:#9aa4b8; --line:#2a3342;
+    --accent:#ff7aa8; --accent-fg:#1a0710; --accent-soft:#3a1827;
+    --code-bg:#222a38; --chip:#252e3d; --ok:#5fd39a; color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--font-body);
+    padding:0 max(16px,env(safe-area-inset-left,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+  .wrap{max-width:900px;margin:0 auto}
+  header{padding:40px 0 20px;display:flex;flex-direction:column;gap:12px}
+  h1{margin:0;font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.15;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:60ch}
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .install{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;
+    display:flex;flex-direction:column;gap:10px;margin:8px 0 24px}
+  .install h2{margin:0;font-size:1rem}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
+  .toolbar input{flex:1 1 220px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:8px;
+    background:var(--surface);color:var(--fg);font:inherit}
+  .tab{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:99px;
+    padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+  .tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+  .level{margin:28px 0 12px;font-size:1.15rem}
+  .level small{color:var(--muted);font-weight:400;margin-left:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;
+    display:flex;flex-direction:column;gap:12px;min-width:0}
+  .card h3{margin:0;font-size:1.05rem;line-height:1.3}
+  .goal{margin:0;color:var(--muted);font-size:.92rem}
+  .prompt{position:relative;background:var(--code-bg);border-radius:8px;padding:12px 12px 12px 12px}
+  .prompt pre{margin:0;white-space:pre-wrap;word-break:break-word;font:.86rem/1.55 var(--font-mono);
+    padding-right:70px}
+  .copy{position:absolute;top:8px;right:8px;border:1px solid var(--line);background:var(--surface);
+    color:var(--fg);border-radius:6px;padding:4px 10px;font:inherit;font-size:.8rem;cursor:pointer}
+  .copy.done{color:var(--ok);border-color:var(--ok)}
+  .label{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{background:var(--chip);border-radius:6px;padding:2px 8px;font:.78rem var(--font-mono);overflow-wrap:anywhere}
+  .src{font-size:.85rem}
+  .empty{color:var(--muted);padding:24px 0}
+  footer{margin-top:40px;color:var(--muted);font-size:.9rem}
+  @media (prefers-reduced-motion:no-preference){.copy{transition:color .15s,border-color .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Pluralsight MCP Cookbook</h1>
+    <p class="lede">Copy-ready prompts for the Pluralsight MCP Server. Search the library, find tutorial clips, check your activity, and build learning plans from your AI assistant.</p>
+    <p class="lede"><a href="https://github.com/pluralsight/pluralsight-mcp-cookbook">View the repo on GitHub</a></p>
+  </header>
+
+  <section class="install" aria-labelledby="install-h">
+    <h2 id="install-h">Quick start (Claude Code)</h2>
+    <div class="prompt">
+      <pre data-copy>/plugin marketplace add pluralsight/pluralsight-mcp-cookbook
+/plugin install pluralsight@pluralsight</pre>
+      <button class="copy" type="button">Copy</button>
+    </div>
+    <p class="goal">Authenticate with your Pluralsight account on first use. Other setups: <a href="https://github.com/pluralsight/pluralsight-mcp-cookbook/blob/main/docs/installation.md">installation guide</a>.</p>
+  </section>
+
+  <div class="toolbar" role="group" aria-label="Filter prompts">
+    <input id="q" type="search" placeholder="Search prompts, e.g. Terraform, labs, feedback" aria-label="Search prompts">
+    <button class="tab" type="button" data-level="all" aria-pressed="true">All</button>
+    <button class="tab" type="button" data-level="1" aria-pressed="false">Getting started</button>
+    <button class="tab" type="button" data-level="2" aria-pressed="false">Intermediate</button>
+    <button class="tab" type="button" data-level="3" aria-pressed="false">Advanced</button>
+  </div>
+
+  <main id="list" aria-live="polite"></main>
+
+  <footer>
+    <p>Prompts come from the <code>examples/</code> folder of the repo. MIT licensed.</p>
+  </footer>
+</div>
+
+<script>
+/* Keep in sync with examples/**\/*.md. Each entry: level, title, goal, prompts (first is the main
+   prompt, the rest are variations), tools, file (path under examples/). */
+const PROMPTS = [
+  { level: 1, title: "Search the library", file: "01-getting-started/search-the-library.md",
+    goal: "Find Pluralsight content on a topic, the most common starting point.",
+    prompts: [
+      "Search Pluralsight for beginner courses on Python.",
+      "Find the most popular hands-on labs for Docker.",
+      "Are there any learning paths for AWS certification? Show me the newest ones."
+    ], tools: ["search_pluralsight_library"] },
+  { level: 1, title: "Check your recent activity", file: "01-getting-started/check-recent-activity.md",
+    goal: "See what you were last working on, and verify the server is connected to your account.",
+    prompts: [
+      "What have I been learning on Pluralsight recently?",
+      "What was the last course I was watching? Where did I leave off?"
+    ], tools: ["get_user_content_activity"] },
+  { level: 1, title: "Ask a Help Center question", file: "01-getting-started/ask-help-center.md",
+    goal: "Get an answer about the Pluralsight platform from official documentation.",
+    prompts: [
+      "Using Pluralsight's Help Center, how do I download courses for offline viewing?",
+      "What does my Pluralsight subscription include? Check the Help Center.",
+      "How do I add users to my Pluralsight team plan?"
+    ], tools: ["query_pluralsight_help_center_index"] },
+  { level: 1, title: "Find a specific tutorial clip", file: "01-getting-started/find-tutorial-clip.md",
+    goal: "Find the exact course content that answers a narrow technical question.",
+    prompts: [
+      "Find Pluralsight content that explains how to set up dependency injection in ASP.NET Core.",
+      "I'm stuck on Kubernetes ingress controllers. What Pluralsight clips cover that specifically?"
+    ], tools: ["query_pluralsight_content_index"] },
+  { level: 1, title: "Send feedback to Pluralsight", file: "01-getting-started/send-feedback.md",
+    goal: "Tell the Pluralsight team what's working, what's missing, and what broke.",
+    prompts: ["I want to send feedback about the Pluralsight MCP server."],
+    tools: ["submit_user_feedback"] },
+
+  { level: 2, title: "What should I learn next?", file: "02-intermediate/what-to-learn-next.md",
+    goal: "Get recommendations grounded in what you've actually been learning.",
+    prompts: ["Look at my recent Pluralsight activity and recommend what I should learn next\nto build on it. Suggest 2-3 options and explain why each fits."],
+    tools: ["get_user_content_activity", "search_pluralsight_library"] },
+  { level: 2, title: "Beginner-to-advanced course sequence", file: "02-intermediate/progressive-course-sequence.md",
+    goal: "Get an ordered sequence of courses that takes you from novice to advanced on one topic.",
+    prompts: ["Build me a course sequence on Terraform that goes from beginner to advanced.\nCheck if a learning path already covers this, and fill any gaps with\nindividual courses. Order everything and tell me roughly what each step teaches."],
+    tools: ["search_pluralsight_library"] },
+  { level: 2, title: "Deep-dive on a subtopic", file: "02-intermediate/deep-dive-subtopic.md",
+    goal: "Find a full course on a topic and the exact clips covering the part you care about.",
+    prompts: ["I need to learn React state management, specifically React Query. Find me a\nsolid course on React state management, and also find the specific clips or\nmodules that cover React Query so I can jump straight to them."],
+    tools: ["search_pluralsight_library", "query_pluralsight_content_index"] },
+  { level: 2, title: "Assess, then practice", file: "02-intermediate/assess-then-practice.md",
+    goal: "Figure out your actual level with a Skill IQ, then get hands-on practice matched to it.",
+    prompts: ["I think I'm intermediate at SQL but I'm not sure. Find me a Pluralsight\nSkill IQ assessment for SQL, and based on my recent activity, suggest\nhands-on labs at the level you think I'm actually at."],
+    tools: ["search_pluralsight_library", "get_user_content_activity"] },
+
+  { level: 3, title: "Use the learning-plan skill", file: "03-advanced/use-learning-plan-skill.md",
+    goal: "Run the bundled learning-plan skill end to end for a personalized, ordered curriculum. Needs the plugin installed.",
+    prompts: [
+      "/pluralsight:learning-plan become proficient in Go for backend services within 2 months",
+      "Build me a study plan to become proficient in Go backend development.\nI have about 2 months and 5 hours a week."
+    ], tools: ["learning-plan skill", "get_user_content_activity", "search_pluralsight_library"] },
+  { level: 3, title: "Run the learning-advisor agent", file: "03-advanced/run-learning-advisor-agent.md",
+    goal: "Delegate open-ended curriculum design to a dedicated agent. Needs the plugin installed.",
+    prompts: ["Use the learning-advisor agent to design a curriculum for me to move from\nbackend development into a platform engineering role over the next 6 months."],
+    tools: ["learning-advisor agent", "get_user_content_activity", "query_pluralsight_content_index"] },
+  { level: 3, title: "Team onboarding plan", file: "03-advanced/team-onboarding-plan.md",
+    goal: "Build a reusable onboarding curriculum for new team members on your team's stack.",
+    prompts: ["Create an onboarding learning plan for new engineers joining a team that\nuses TypeScript, React, PostgreSQL, and AWS. Structure it as:\n\n- Week 1: fundamentals they must have (with a Skill IQ per topic to let\n  experienced hires skip ahead)\n- Weeks 2-3: core stack courses\n- Week 4: hands-on labs\n\nFor each item, search Pluralsight and pick specific content. Output the\nplan as a markdown document I can commit to our repo."],
+    tools: ["search_pluralsight_library"] },
+  { level: 3, title: "Learn from your codebase", file: "03-advanced/learn-from-your-codebase.md",
+    goal: "Combine your assistant's view of your code with Pluralsight search to close real skill gaps. Run inside a project.",
+    prompts: ["Look at this repository's tech stack and the parts of the codebase I've been\nchanging recently (check git history for my commits). Identify the 2-3\ntechnologies where deeper knowledge would help me most, then find Pluralsight\ncontent for each - specific clips for quick wins and a course for the\nbiggest gap."],
+    tools: ["search_pluralsight_library", "query_pluralsight_content_index"] }
+];
+
+const LEVELS = {
+  1: ["Getting started", "Single-tool prompts to verify your setup"],
+  2: ["Intermediate", "Prompts that combine several tools"],
+  3: ["Advanced", "Skill and agent workflows"]
+};
+const REPO = "https://github.com/pluralsight/pluralsight-mcp-cookbook/blob/main/examples/";
+
+function copyText(text, btn) {
+  const done = () => {
+    btn.textContent = "Copied";
+    btn.classList.add("done");
+    setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1500);
+  };
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "Select and copy"; }
+    ta.remove();
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, fallback);
+  } else { fallback(); }
+}
+
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+function promptBlock(text) {
+  const box = el("div", "prompt");
+  const pre = el("pre", null, text);
+  const btn = el("button", "copy", "Copy");
+  btn.type = "button";
+  btn.setAttribute("aria-label", "Copy prompt to clipboard");
+  btn.addEventListener("click", () => copyText(text, btn));
+  box.append(pre, btn);
+  return box;
+}
+
+function card(p) {
+  const c = el("article", "card");
+  c.append(el("h3", null, p.title), el("p", "goal", p.goal), promptBlock(p.prompts[0]));
+  if (p.prompts.length > 1) {
+    c.append(el("p", "label", "Variations"));
+    p.prompts.slice(1).forEach(v => c.append(promptBlock(v)));
+  }
+  c.append(el("p", "label", "Tools used"));
+  const chips = el("div", "chips");
+  p.tools.forEach(t => chips.append(el("span", "chip", t)));
+  c.append(chips);
+  const src = el("p", "src");
+  const a = el("a", null, "Full example on GitHub");
+  a.href = REPO + p.file;
+  src.append(a);
+  c.append(src);
+  return c;
+}
+
+let level = "all";
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const list = document.getElementById("list");
+  list.replaceChildren();
+  let shown = 0;
+  [1, 2, 3].forEach(l => {
+    if (level !== "all" && String(l) !== level) return;
+    const items = PROMPTS.filter(p => p.level === l &&
+      (!q || (p.title + " " + p.goal + " " + p.prompts.join(" ") + " " + p.tools.join(" ")).toLowerCase().includes(q)));
+    if (!items.length) return;
+    const h = el("h2", "level", LEVELS[l][0]);
+    h.append(el("small", null, LEVELS[l][1]));
+    const grid = el("div", "grid");
+    items.forEach(p => grid.append(card(p)));
+    list.append(h, grid);
+    shown += items.length;
+  });
+  if (!shown) list.append(el("p", "empty", "No prompts match your search."));
+}
+
+document.getElementById("q").addEventListener("input", render);
+document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+  level = b.dataset.level;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t === b)));
+  render();
+}));
+document.querySelectorAll(".install .copy").forEach(btn =>
+  btn.addEventListener("click", () => copyText(btn.parentElement.querySelector("pre").textContent, btn)));
+render();
+</script>
+</body>
+</html>
